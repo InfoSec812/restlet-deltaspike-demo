@@ -1,8 +1,10 @@
-package com.zanclus.test.data.entities;
+package com.zanclus.restlet.demo.data.entities;
 
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,6 +29,7 @@ import lombok.experimental.Builder;
 public class ToDo implements Serializable {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @XmlAttribute(required = true)
     private Long id;
 

@@ -1,4 +1,4 @@
-package com.zanclus.test;
+package com.zanclus.restlet.demo;
 
 import java.util.Set;
 import javax.ws.rs.Path;

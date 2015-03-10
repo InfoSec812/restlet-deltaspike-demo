@@ -1,5 +1,6 @@
 package com.zanclus.test;
 
+import com.zanclus.restlet.demo.ExampleRest;
 import javax.inject.Inject;
 import org.apache.deltaspike.testcontrol.api.junit.CdiTestRunner;
 import org.junit.Assert;

@@ -1,13 +1,13 @@
-package com.zanclus.test.data;
+package com.zanclus.restlet.demo.data;
 
-import com.zanclus.test.data.entities.ToDo;
+import com.zanclus.restlet.demo.data.entities.ToDo;
 import java.io.Serializable;
 import java.util.List;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 /**
  *
@@ -46,8 +46,9 @@ public class ToDoDAO implements Serializable {
     @Transactional
     public ToDo addToDo(ToDo item) {
         try {
-            em.persist(item);
-            return item;
+            ToDo retVal = em.merge(item);
+            em.flush();
+            return retVal;
         } catch (Exception e) {
             LOG.error("Error getting ToDo list", e);
             return null;
@@ -57,8 +58,9 @@ public class ToDoDAO implements Serializable {
     @Transactional
     public ToDo updateToDo(ToDo item) {
         try {
-            em.merge(item);
-            return em.find(ToDo.class, item.id());
+            ToDo retVal = em.merge(item);
+            em.flush();
+            return retVal;
         } catch (Exception e) {
             LOG.error("Error getting ToDo list", e);
             return null;

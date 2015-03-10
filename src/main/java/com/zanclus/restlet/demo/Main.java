@@ -1,4 +1,4 @@
-package com.zanclus.test;
+package com.zanclus.restlet.demo;
 
 import org.apache.deltaspike.cdise.api.CdiContainer;
 import org.apache.deltaspike.cdise.api.CdiContainerLoader;
