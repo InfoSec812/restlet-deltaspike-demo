@@ -50,7 +50,7 @@ public class ToDoDAOTest {
      */
     @Test
     public void testGetToDo() {
-        ToDo persisted1 = dao.addToDo(test1);
+        Long persisted1 = dao.addToDo(test1);
         ToDo item = dao.getToDo(1L);
         assertNotNull("The returned ToDo item MUST NOT be null", item);
         assertTrue("The returned ToDo item MUST have an ID of '1'", item.id()==1L);
@@ -61,13 +61,13 @@ public class ToDoDAOTest {
      */
     @Test
     public void testAddToDo() {
-        ToDo persisted1 = dao.addToDo(test1);
+        Long persisted1 = dao.addToDo(test1);
         assertNotNull("The returned entity MUST NOT be null", persisted1);
-        assertNotNull("Once persisted to the database, the ID MUST NOT be null.", persisted1.id());
-        ToDo persisted2 = dao.addToDo(test2);
+        assertNotNull("Once persisted to the database, the ID MUST NOT be null.", persisted1);
+        Long persisted2 = dao.addToDo(test2);
         assertNotNull("The returned entity MUST NOT be null", persisted2);
-        assertNotNull("Once persisted to the database, the ID MUST NOT be null.", persisted2.id());
-        assertNotEquals("The IDs of the entities MUST NOT be the same.", persisted1.id(), persisted2.id());
+        assertNotNull("Once persisted to the database, the ID MUST NOT be null.", persisted2);
+        assertNotEquals("The IDs of the entities MUST NOT be the same.", persisted1, persisted2);
     }
 
     /**
@@ -75,7 +75,8 @@ public class ToDoDAOTest {
      */
     @Test
     public void testUpdateToDo() {
-        ToDo persisted1 = dao.addToDo(test1);
+        Long id= dao.addToDo(test1);
+        ToDo persisted1 = dao.getToDo(id);
         Date origDue = persisted1.due();
         ToDo item = new ToDo();
         item.id(persisted1.id());
@@ -92,7 +93,7 @@ public class ToDoDAOTest {
      */
     @Test
     public void testDeleteToDo() {
-        ToDo persisted1 = dao.addToDo(test1);
+        Long persisted1 = dao.addToDo(test1);
         boolean retVal = dao.deleteToDo(1L);
         assertTrue("Delete operation MUST return true for object which exists in DB.", retVal);
     }

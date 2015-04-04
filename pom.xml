@@ -210,7 +210,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <mainClass>com.zanclus.test.Main</mainClass>
+                    <mainClass>com.zanclus.restlet.demo.Main</mainClass>
                     <executable>maven</executable>
                     <workingDirectory>/tmp</workingDirectory>
                 </configuration>
