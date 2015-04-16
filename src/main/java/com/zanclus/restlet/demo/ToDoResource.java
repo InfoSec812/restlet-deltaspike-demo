@@ -63,7 +63,7 @@ public class ToDoResource implements Serializable {
   @POST
   @Consumes({"application/xml", "application/json"})
   @Produces({"application/xml", "application/json"})
-  public ToDo addToDo(ToDo item) {
+  public ToDo addToDo(ToDo item) throws ResourceException {
     ToDo todo = dao.addToDo(item);
     if (todo.id()==null) {
       throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
@@ -74,7 +74,7 @@ public class ToDoResource implements Serializable {
   @PUT
   @Path("/{id}")
   @Produces({"application/xml", "application/json"})
-  public ToDo updateToDo(@PathParam("id") Long id, ToDo item) {
+  public ToDo updateToDo(@PathParam("id") Long id, ToDo item) throws ResourceException {
     ToDo todo = dao.updateToDo(item);
     if (todo==null) {
        throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
