@@ -168,6 +168,11 @@
             <version>${deltaspike.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.restlet.jse</groupId>
+            <artifactId>org.restlet.ext.raml</artifactId>
+            <version>${restlet.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -211,8 +216,7 @@
                 </executions>
                 <configuration>
                     <mainClass>com.zanclus.restlet.demo.Main</mainClass>
-                    <executable>maven</executable>
-                    <workingDirectory>/tmp</workingDirectory>
+                    <workingDirectory>${basedir}</workingDirectory>
                 </configuration>
             </plugin>
         </plugins>
