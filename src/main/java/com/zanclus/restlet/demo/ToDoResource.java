@@ -18,7 +18,6 @@ package com.zanclus.restlet.demo;
 import com.zanclus.restlet.demo.data.ToDoDAO;
 import com.zanclus.restlet.demo.data.entities.ToDo;
 import java.io.Serializable;
-import java.net.URI;
 import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -30,6 +29,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import org.restlet.data.Status;
+import org.restlet.resource.ResourceException;
 
 /**
  *
@@ -43,42 +44,42 @@ public class ToDoResource implements Serializable {
 
   @GET
   @Produces({"application/xml", "application/json"})
-  public Response getAllToDos() {
+  public List<ToDo> getAllToDos() {
     List<ToDo> todos = dao.getAllToDos();
-    return Response.ok(todos).build();
+    return todos;
   }
 
   @GET
   @Path("/{id}")
   @Produces({"application/xml", "application/json"})
-  public Response getToDoById(@PathParam("id") Long id) {
+  public ToDo getToDoById(@PathParam("id") Long id) throws ResourceException {
     ToDo todo = dao.getToDo(id);
     if (todo==null) {
-      return Response.noContent().build();
+      throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
     }
-    return Response.ok(todo).build();
+    return todo;
   }
   
   @POST
   @Consumes({"application/xml", "application/json"})
   @Produces({"application/xml", "application/json"})
-  public Response addToDo(ToDo item) {
-    Long id = dao.addToDo(item);
-    if (id==null) {
-      return Response.status(Response.Status.BAD_REQUEST).build();
+  public ToDo addToDo(ToDo item) {
+    ToDo todo = dao.addToDo(item);
+    if (todo.id()==null) {
+      throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
     }
-    return Response.created(URI.create(id.toString())).build();
+    return todo;
   }
   
   @PUT
   @Path("/{id}")
   @Produces({"application/xml", "application/json"})
-  public Response updateToDo(@PathParam("id") Long id, ToDo item) {
+  public ToDo updateToDo(@PathParam("id") Long id, ToDo item) {
     ToDo todo = dao.updateToDo(item);
     if (todo==null) {
-      return Response.notModified().build();
+       throw new ResourceException(Status.SERVER_ERROR_INTERNAL);
     }
-    return Response.accepted(todo).build();
+    return todo;
   }
   
   @DELETE

@@ -59,11 +59,11 @@ public class ToDoDAO implements Serializable {
     }
 
     @Transactional
-    public Long addToDo(ToDo item) {
+    public ToDo addToDo(ToDo item) {
         try {
             ToDo retVal = em.merge(item);
             em.flush();
-            return retVal.id();
+            return retVal;
         } catch (Exception e) {
             LOG.error("Error getting ToDo list", e);
             return null;
