@@ -17,7 +17,9 @@ package com.zanclus.restlet.demo;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import org.raml.emitter.RamlEmitter;
+import org.raml.model.Raml;
 import org.restlet.data.Reference;
 import org.restlet.ext.apispark.internal.conversion.raml.RamlTranslator;
 import org.restlet.ext.apispark.internal.introspection.application.ApplicationIntrospector;
@@ -33,17 +35,20 @@ public class RamlResource {
   private Definition definition;
 
   @GET
+  @Produces({"text/plain"})
   public String getRaml() {
-    return new RamlEmitter().dump(RamlTranslator
-        .getRaml(getDefinition()));
+    Raml raml = RamlTranslator.getRaml(getDefinition());
+    raml.setTitle("Restlet DeltaSpike Demo");
+    raml.setVersion("1");
+    return new RamlEmitter().dump(raml);
   }
 
   private Definition getDefinition() {
     if (definition == null) {
       synchronized (RamlResource.class) {
-        definition = ApplicationIntrospector.getDefinition(
-            org.restlet.Application.getCurrent(),
-            new Reference("/"), null, false);
+        Reference baseRef = new Reference("http", "localhost", 8080, "/", null, null);
+        org.restlet.Application app = org.restlet.Application.getCurrent();
+        definition = ApplicationIntrospector.getDefinition(app, baseRef, null, false);
       }
     }
 
