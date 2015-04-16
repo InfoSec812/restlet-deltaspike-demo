@@ -228,6 +228,9 @@
             <owner>Deven Phillips</owner>
             <email>dphillips@zanclus.com</email>
           </properties>
+          <excludes>
+            <exclude>**/lombok.config</exclude>
+          </excludes>
         </configuration>
         <executions>
           <execution>
