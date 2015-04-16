@@ -12,7 +12,7 @@ import javax.persistence.PersistenceUnitUtil;
 
 /**
  *
- * @author <a href="">Deven Phillips</a>
+ * @author <a href="https://github.com/InfoSec812">Deven Phillips</a>
  */
 @ApplicationScoped
 public class Producer {
