@@ -11,7 +11,7 @@ import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 /**
  *
- * @author <a href="">Deven Phillips</a>
+ * @author <a href="https://github.com/InfoSec812">Deven Phillips</a>
  */
 @SessionScoped
 @Slf4j

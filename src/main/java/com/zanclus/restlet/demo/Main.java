@@ -11,6 +11,10 @@ import org.restlet.ext.jaxrs.InstantiateException;
 import org.restlet.ext.jaxrs.JaxRsApplication;
 import org.restlet.ext.jaxrs.ObjectFactory;
 
+/**
+ * 
+ * @author <a href="https://github.com/InfoSec812">Deven Phillips</a>
+ */
 public class Main {
 
     private static final int PORT = 8080;
