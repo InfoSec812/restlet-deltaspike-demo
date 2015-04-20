@@ -49,8 +49,10 @@ public class Main {
         Server server = new Server(Protocol.HTTP, PORT);
         component.getServers().add(server);
 
-        JaxRsApplication jaxRsApplication = new JaxRsApplication(component.getContext().createChildContext());
-        jaxRsApplication.add(new Application());
+        JaxRsApplication jaxRsApplication = new JaxRsApplication(component.getContext());
+        Application app = new Application();
+        jaxRsApplication.add(app);
+        new JaxRsApplicationRamlSpecificationRestlet(app);
         jaxRsApplication.setObjectFactory(objectFactory);
         component.getDefaultHost().attach("/rest", jaxRsApplication);
 
